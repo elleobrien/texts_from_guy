@@ -3,15 +3,29 @@ on: [push]
 
 jobs:
   build:
-    name: Greeting
+
     runs-on: ubuntu-latest
+    strategy:
+      # You can use PyPy versions in python-version. For example, pypy2 and pypy3
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8]
+
     steps:
-      - name: Echo the greeting's time
-        env:
-          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-          TWILIO_NO: ${{ secrets.TWILIO_NO }}
-          MY_NO: ${{ secrets.MY_NO }}
-        run: |
-          pip install -r requirements.txt
-          python textmemaybe.py
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    # You can test your matrix by printing the current Python version
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
+      
+    - name: Send me a text
+      env:
+        ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+        TWILIO_NO: ${{ secrets.TWILIO_NO }}
+        MY_NO: ${{ secrets.MY_NO }}
+      run: |
+        pip install -r requirements.txt
+        python textmemaybe.py
