@@ -11,7 +11,10 @@ jobs:
 
     # You can test your matrix by printing the current Python version
     - name: Display Python version
-      run: python -c "import sys; print(sys.version)"
+      run: |
+        python3 -c "import sys; print(sys.version)" 
+        pip --version
+      
       
     - name: Send me a text
       env:
@@ -20,5 +23,5 @@ jobs:
         TWILIO_NO: ${{ secrets.TWILIO_NO }}
         MY_NO: ${{ secrets.MY_NO }}
       run: |
-        pip install -r requirements.txt
-        python textmemaybe.py
+        pip install twilio
+        python3 textmemaybe.py
