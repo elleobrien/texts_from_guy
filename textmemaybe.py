@@ -9,4 +9,3 @@ message = client.messages \
          to='MY_NO'
      )
 
-print(message.sid)
