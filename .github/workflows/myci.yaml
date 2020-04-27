@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo the greeting's time
+        env:
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TWILIO_NO: ${{ secrets.TWILIO_NO }}
+          MY_NO: ${{ secrets.MY_NO }}
         run: |
           pip install -r requirements.txt
           python textmemaybe.py
