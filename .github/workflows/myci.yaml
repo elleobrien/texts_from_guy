@@ -23,5 +23,5 @@ jobs:
         TWILIO_NO: ${{ secrets.TWILIO_NO }}
         MY_NO: ${{ secrets.MY_NO }}
       run: |
-        pip install twilio
+        pip3 install twilio
         python3 textmemaybe.py
