@@ -1,4 +1,3 @@
 # makenums
 
-here comes a readme
-AGAIN
+heeeere comes ther eadme
